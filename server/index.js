@@ -7,7 +7,7 @@ const massive = require('massive')
 // Import this after exporting schema and root
 const gqlConfigs = require('./graphqlConfigs')
 
-// Nothing new so far here. Let's go ahead and connect to our databse. Make sure your connection string is in the .env file. As always, you should put this file in the root directory of the project and add it to you gitignore - unless you want random wackos filling your database with links to their latest scamming project!
+// Nothing new so far here. Let's go ahead and connect to our database. Make sure your connection string is in the .env file. As always, you should put this file in the root directory of the project and add it to you gitignore - unless you want random wackos filling your database with links to their latest scamming project!
 massive(process.env.CONNECTION_STRING).then(dbInstance => {
     // Run this initialization to fill out some tables in your database, and then delete or comment it after it finishes.
     // dbInstance.init()
