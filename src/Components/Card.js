@@ -1,16 +1,4 @@
 import React, { Component } from 'react';
-import { Mutation } from 'react-apollo'
-import { GET_PRODUCTS } from './ProductDashboard';
-import { NEW_PRODUCT } from './AddProduct'
-import gql from 'graphql-tag'
-
-export const DELETE_PRODUCT = gql`
-    mutation deleteProduct($id: ID!) {
-        deleteProduct(id: $id) {
-            name
-        }
-    }
-`;
 
 export default class Card extends Component {
     state = {
@@ -28,7 +16,6 @@ export default class Card extends Component {
     }
 
     render() {
-        console.log('------------ this.props', this.props)
         const { editing } = this.state
         const { id, name, price, picture, stock, category } = this.props
         return (
@@ -56,45 +43,12 @@ export default class Card extends Component {
                         {!editing && 
                             <React.Fragment>
                                 <button onClick={() => this.setState({ editing: true })}>Edit</button>
-                                <Mutation
-                                    mutation={DELETE_PRODUCT}
-                                    refetchQueries={[{ query: GET_PRODUCTS }]}
-                                >
-                                    {(deleteProduct) => (
-                                        <button onClick={() => {
-                                            deleteProduct({
-                                                variables: {
-                                                    id
-                                                }
-                                            })
-                                        }}>Delete</button>
-                                    )}
-                                </Mutation>
+                                <button>Delete</button>
                             </ React.Fragment>
                         }
                         {editing && 
                             <React.Fragment>
-                                <Mutation
-                                    mutation={NEW_PRODUCT}
-                                    refetchQueries={[{ query: GET_PRODUCTS }]}
-                                >
-                                    {(updateProduct, {loading, error }) => (
-                                        <button onClick={() => {
-                                            updateProduct({
-                                                variables: {
-                                                    input: {
-                                                        id: +id,
-                                                        name: this.state.name,
-                                                        price: +(+this.state.price).toFixed(2),
-                                                        picture: this.state.picture,
-                                                        stock: +this.state.stock,
-                                                        category: +category.id
-                                                    }
-                                                }
-                                            })
-                                        }}>Submit</button>
-                                    )}
-                                </Mutation>
+                                <button>Submit</button>
                                 <button onClick={() => this.setState({ editing: false })}>Cancel</button>
                             </React.Fragment>
                         }

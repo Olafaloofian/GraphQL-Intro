@@ -1,20 +1,4 @@
 import React, { Component } from 'react';
-import { Mutation } from 'react-apollo'
-import gql from 'graphql-tag'
-import { GET_PRODUCTS } from './ProductDashboard'
-
-export const NEW_PRODUCT = gql`
-    mutation newProduct($input: updateProduct!) {
-        submitProduct(input: $input) {
-            id
-            name
-            price
-            category {
-                id
-            }
-        }
-    }
-`;
 
 export default class AddProduct extends Component {
     state = {
@@ -49,35 +33,11 @@ export default class AddProduct extends Component {
                             <option value={2}>Tools</option>
                             <option value={3}>Clothing</option>
                         </select>
-                        <Mutation
-                            mutation={NEW_PRODUCT}
-                            refetchQueries={[{ query: GET_PRODUCTS }]}
-                            onCompleted={() => this.setState({ editing: false })}
-                        >
-                            {(addProduct, { loading, error }) => (
                                 <div>
-                                    <button
-                                        onClick={() => {
-                                        addProduct({
-                                            variables: {
-                                                input: {
-                                                    name: this.state.name,
-                                                    price: +(+this.state.price).toFixed(2),
-                                                    picture: this.state.picture,
-                                                    stock: +this.state.stock,
-                                                    category: +this.state.category
-                                                }
-                                            }
-                                        })
-                                        }}
-                                    >
+                                    <button>
                                         Submit
                                     </button>
-                                    {loading && <p>Loading...</p>}
-                                    {error && <p>Error :(</p>}
                                 </div>
-                            )}
-                        </Mutation>
                         <button onClick={() => this.setState({ editing: false })}>Cancel</button>
                     </div>
                 }
