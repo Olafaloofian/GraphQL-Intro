@@ -1,20 +1,7 @@
 import React, { Component } from 'react';
 import { Mutation } from 'react-apollo'
-import gql from 'graphql-tag'
+import { NEW_PRODUCT } from './Card'
 import { GET_PRODUCTS } from './ProductDashboard'
-
-export const NEW_PRODUCT = gql`
-    mutation newProduct($input: updateProduct!) {
-        submitProduct(input: $input) {
-            id
-            name
-            price
-            category {
-                id
-            }
-        }
-    }
-`;
 
 export default class AddProduct extends Component {
     state = {
@@ -50,6 +37,7 @@ export default class AddProduct extends Component {
                             <option value={3}>Clothing</option>
                         </select>
                         <Mutation
+                        // We can import the query and mutation we need from our other component. Nice!
                             mutation={NEW_PRODUCT}
                             refetchQueries={[{ query: GET_PRODUCTS }]}
                             onCompleted={() => this.setState({ editing: false })}
