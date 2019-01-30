@@ -1,68 +1,88 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## GraphQL Lecture
 
-## Available Scripts
+I'll be honest. After I had the DevMountain GraphQL lecture in my cohort, I was left more confused than I was to start off. That was really unfortunate because GraphQL is really exciting and a highly sought-after skill for 2019. My goal is to leave you guys feeling comfortable enough to be able to start using GraphQL in your own projects and tell potential employers you have some experience in it. It is a lot to cover in a single day, but what's new eh? That's just how we do it at DevMountain!
 
-In the project directory, you can run:
+I want to reiterate what exactly GraphQL is and does for your code because I was confused about it for a while. It's not a replacement for SQL or a place to store data. It's a tool to make data retrieval and manipulation much quicker and more intuitive. For you guys, in most cases GraphQL will be set up and live on your server, where it can replace or exist alongside your REST-ful API endpoints. Then, instead of making a web request (like with axios) on the front end, you just query your GraphQL schema and get what you need!
 
-### `npm start`
+Alright, let's go set up our server!
+<!-- => server/index -->
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### GraphiQL
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+One super nice feature of GraphQL is that it is self documenting. What the crap does that even mean? Let's find out. Open up a browser and go to localhost:4020(PORT NUMBER)/graphql. The Docs tab on the top right allows us to search our own schema and see the structures we have set up for ourselves. The coolest thing you can do in GraphiQL, however is entering and running statements on the left side of the pane.
 
-### `npm test`
+<!-- Go through the following queries/mutations to show them how to use GraphiQL -->
+<!-- Show them how nice the errors are and how this client pretty much knows exactly what you are trying to get at. Explain that this is because of the type system. -->
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```graphql
+query getProducts {
+  products {
+    name
+		id
+    price
+    picture
+    stock
+    category {
+      id
+      name
+      description
+    }
+  }
+}
 
-### `npm run build`
+query getProduct {
+  product(id: 3) {
+    name
+    price
+    picture
+    category {
+      description
+    }
+  }
+}
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+query getProductCategory {
+  productCategory(id: 3) {
+    name
+    description
+    id
+  }
+}
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+query getProductCategories {
+  productCategories{
+    id
+    name
+    description
+  }
+}
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+mutation deleteProduct {
+  deleteProduct(id: ???) {
+    name
+  }
+}
 
-### `npm run eject`
+mutation newProduct {
+  submitProduct(input: {name: "Buzz Saw", price: 12.88, picture: "https://img.itch.zone/aW1hZ2UvNDI2NzIvMTg0MDIxLmpwZw==/original/ddX2Gg.jpg", stock: 11, category: 2}) {
+    name
+    price
+    category {
+      id
+    }
+  }
+}
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Let's figure out how to use GraphQL in the front end of a React App! The first thing we need to do is enable GraphQL in our src/index file.
+<!-- => index.js -->
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+<!-- TODO: The Schema could be refactored to use a Product interface with different types of products (toys, clothes, tools) that all have some common fields but also a few unique ones. Maybe good for an article? --> 
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Resources:
+`npm i express express-graphql graphql graphql-tag massive react-apollo apollo-boost dotenv cors`
 
-## Learn More
+(Abstract Syntax Trees)[https://blog.buildo.io/a-tour-of-abstract-syntax-trees-906c0574a067]
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+(GraphQL Schema Language Cheat Sheet)[https://wehavefaces.net/graphql-shorthand-notation-cheatsheet-17cd715861b6]

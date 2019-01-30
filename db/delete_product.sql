@@ -1,0 +1,1 @@
+delete from graphql_products where id = $1

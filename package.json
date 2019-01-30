@@ -1,9 +1,19 @@
 {
   "name": "graphql-intro",
   "version": "0.1.0",
+  "main": "server/index",
   "private": true,
   "dependencies": {
+    "apollo-boost": "^0.1.27",
+    "cors": "^2.8.5",
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4",
+    "express-graphql": "^0.7.1",
+    "graphql": "^14.1.1",
+    "graphql-tag": "^2.10.1",
+    "massive": "^5.7.4",
     "react": "^16.7.0",
+    "react-apollo": "^2.4.1",
     "react-dom": "^16.7.0",
     "react-scripts": "2.1.3"
   },
@@ -11,7 +21,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "nodemon": "nodemon --ignore src"
   },
   "eslintConfig": {
     "extends": "react-app"

@@ -1,0 +1,1 @@
+select * from graphql_product_categories where id = $1;
