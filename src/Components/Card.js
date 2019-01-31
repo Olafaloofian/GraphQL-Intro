@@ -97,6 +97,7 @@ export default class Card extends Component {
                                 // Let's make another mutation for editing the product.
                                     mutation={NEW_PRODUCT}
                                     refetchQueries={[{ query: GET_PRODUCTS }]}
+                                    onCompleted={() => this.setState({ editing: false })}
                                 >
                                 {/* We can use the second parameter of the child function to handle loading and error. This should be an object for it to work right. */}
                                     {(updateProduct, {loading, error }) => (
