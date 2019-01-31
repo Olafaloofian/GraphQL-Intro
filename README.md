@@ -1,6 +1,6 @@
 ## GraphQL Lecture
 
-I'll be honest. After I had the DevMountain GraphQL lecture in my cohort, I was left more confused than I was to start off. That was really unfortunate because GraphQL is really exciting and a highly sought-after skill for 2019. My goal is to leave you guys feeling comfortable enough to be able to start using GraphQL in your own projects and tell potential employers you have some experience in it. It is a lot to cover in a single day, but what's new eh? That's just how we do it at DevMountain!
+GraphQL is really exciting and a highly sought-after skill for 2019. My goal is to leave you guys feeling comfortable enough to be able to start using GraphQL in your own projects and tell potential employers you have some experience in it. It is a lot to cover in a single day, but what's new eh? That's just how we do it at DevMountain!
 
 I want to reiterate what exactly GraphQL is and does for your code because I was confused about it for a while. It's not a replacement for SQL or a place to store data. It's a tool to make data retrieval and manipulation much quicker and more intuitive. For you guys, in most cases GraphQL will be set up and live on your server, where it can replace or exist alongside your REST-ful API endpoints. Then, instead of making a web request (like with axios) on the front end, you just query your GraphQL schema and get what you need!
 
