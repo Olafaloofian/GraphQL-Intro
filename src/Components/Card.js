@@ -36,9 +36,23 @@ export default class Card extends Component {
     }
 
     handleInput = (e) => {
+        console.log('------------ this.props.name', this.props.name)
         this.setState({
             [e.target.name]: e.target.value
         })
+    }
+
+    // This function will make sure our props are refreshed when the editing state changes
+    componentDidUpdate(prevProps, prevState) {
+        if(prevState.editing !== this.state.editing) {
+            const { name, price, picture, stock } = this.props
+            this.setState({
+                name,
+                price,
+                picture,
+                stock
+            })
+        }
     }
 
     render() {
